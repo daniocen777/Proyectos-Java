@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Acceso al sistema</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <b:container id="containerLogin" >
+                <b:panel id="pnlLogin" title="Inicio De Sesión" look="primary" collapsible="false">
+                    <b:row>
+                        <b:column medium-screen="6">
+                            <b:image value="resources/images/login/restaurante.png" style="width: 100%;"></b:image> 
+                        </b:column>
+                        <!-- medium-screen="2" => 2% -->
+                        <b:column medium-screen="6">
+                            <!-- Usuario-->
+                            <b:column medium-screen="2">
+                                <h:outputText value="Usuario: "></h:outputText>
+                            </b:column>
+                            <b:column medium-screen="10">
+                                <b:inputText id="txtUsuario" placeholder="Usuario" required="true"
+                                             value="#{loginController.username}"
+                                             required-message="El usuario es obligatorio">
+                                    <!-- prepend => anttes de crear caja de texto-->
+                                    <f:facet name="prepend">
+                                        <b:icon name="user"></b:icon>
+                                    </f:facet>
+                                </b:inputText>
+                                <!-- Foco-->
+                                <b:focus target="txtUsuario"></b:focus>
+                            </b:column>
+                            <!-- Password -->
+                            <b:column medium-screen="2">
+                                <h:outputText value="Contraseña: "></h:outputText>
+                            </b:column>
+                            <b:column medium-screen="10">
+                                <b:inputSecret id="txtPassword" placeholder="********" required="true"
+                                               value="#{loginController.password}"
+                                               required-message="Campo contraseña es requerido">
+                                    <!-- prepend => anttes de crear caja de texto-->
+                                    <f:facet name="prepend">
+                                        <b:icon name="lock"></b:icon>
+                                    </f:facet>
+                                </b:inputSecret>
+                            </b:column>
+                            <!-- Es Admin-->
+                            <b:column span="2"></b:column>
+                            <b:column span="10">
+                                <b:selectBooleanCheckbox value="" caption="Administrador General"></b:selectBooleanCheckbox>
+                            </b:column>  
+                            <b:column span="2"></b:column>
+                            <b:column span="10">
+                                <b:commandButton value="Ingresar" look="primary"
+                                                 style="width: 100%; float: right;"
+                                                 onclick="ajax:loginController.enter()">
+                                </b:commandButton>
+                            </b:column>  
+                        </b:column>
+                    </b:row>
+                </b:panel>
+            </b:container>
+        </h:form>
+    </h:body>
+</html>

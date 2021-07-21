@@ -1,0 +1,7 @@
+com\danicode\restauranteentities\entity\Menu.class
+com\danicode\restauranteentities\entity\Rol.class
+com\danicode\restauranteentities\entity\CommonEntity.class
+com\danicode\restauranteentities\entity\TipoRestaurante.class
+com\danicode\restauranteentities\entity\Restaurante.class
+com\danicode\restauranteentities\entity\Sucursal.class
+com\danicode\restauranteentities\entity\Empleado.class

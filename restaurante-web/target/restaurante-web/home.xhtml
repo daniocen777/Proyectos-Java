@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>BootsFaces Basic Page</title>
+    </h:head>
+    <h:body>
+
+        <h:form>
+            <b:container id="containerLogin" fluid="true">
+                <b:panel id="pnlLogin" title="Inicio De Sesión" look="info" collapsible="false">
+                    <b:panelGrid columns="2" size="lg">
+                        <h1>Holas</h1>
+                        <b:row>
+                            <b:column span="2"></b:column>
+                            <b:column span="10">
+                                <b:commandButton value="Ingresar" look="primary" style="width: 100%; float: right;"></b:commandButton>
+                            </b:column>  
+                        </b:row>
+                        <b:row>
+                            <b:column span="2"></b:column>
+                            <b:column span="10">
+                                <b:selectBooleanCheckbox value="" caption="Administrador General"></b:selectBooleanCheckbox>
+                            </b:column>  
+                        </b:row>
+                    </b:panelGrid>
+                </b:panel>
+            </b:container>
+        </h:form>
+
+    </h:body>
+</html>

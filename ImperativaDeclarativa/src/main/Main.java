@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -142,13 +143,79 @@ public class Main {
         String res = Stream.of("java", "C", "Python", "Ruby").reduce("", (acumulador, lenguaje) -> acumulador + " | " + lenguaje);
         String res2 = res.substring(2, res.length() - 1);
         System.out.println("resultadoAcumulador => " + res2);
-        
-        /* ------------------ Elementos Únicos ------------------ */
-        List<String> nombres = List.of("Dani 1", "Dani 2","Dani 3", "Dani 2", "Dani 4", "Dani 5");
-        nombres.stream().distinct().forEach(elemento -> System.out.println(elemento));
-        
-        /* ------------------ Ordenamiento ------------------ */
 
+        /* ------------------ Elementos Únicos ------------------ */
+        List<String> nombres = List.of("Dani 1", "Dani 2", "Dani 3", "Dani 2", "Dani 4", "Dani 5");
+        nombres.stream().distinct().forEach(elemento -> System.out.println(elemento));
+
+        /* ------------------ Ordenamiento ------------------ */
+        List<Integer> numForOrder = List.of(2, 4, 1, 10, 4, 12, 5, 19);
+        // sorted() => return stream
+        // Ordenando ascendente
+        List<Integer> numbersOrderAsc = numForOrder.stream().sorted().collect(Collectors.toList());
+        System.out.println("Números ordernados ascendente => " + numbersOrderAsc);
+        // Ordenando descendente
+        List<Integer> numbersOrderDesc = numForOrder.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        System.out.println("Números ordernados descendente=> " + numbersOrderDesc);
+        // -- Ordenamientos de objetos
+        LinkedList<Book> books = new LinkedList<>();
+        books.add(new Book("La Orestiada", 600));
+        books.add(new Book("El Ingenioso Idalgo Don Quijote de la Mancha", 300));
+        books.add(new Book("2066", 100));
+        books.add(new Book("El Tambor de Hojalata", 400));
+        books.add(new Book("Casi un Objeto", 120));
+        books.add(new Book("Animales Fantásticos", 250));
+        books.add(new Book("Zoológicos", 250));
+        // Mostrando 3 títulos más vendidos y ordenados por copia
+        Comparator<Book> bookComparator = Comparator.comparing(book -> book.getCopies());
+        books.stream().sorted(bookComparator.reversed()).limit(3).forEach(book -> System.out.println(book.getTitle()));
+        // -- Condición para las comparaciones
+        Comparator<Book> comparator;
+        if (books.stream().count() > 4) {
+            comparator = Comparator.comparing(book -> book.getCopies());
+        } else {
+            comparator = Comparator.comparing(book -> book.getTitle());
+        }
+        System.out.println("*******************");
+        books.stream().sorted(comparator.reversed()).limit(3).forEach(book -> System.out.println(book.getTitle()));
+
+        /* ------------------ Saltos ------------------ */
+        // Segundo y tercer libro más vendido
+        books.stream().sorted(comparator.reversed()).limit(3).skip(1).forEach(book -> System.out.println(book.getTitle()));
+
+        /* ------------------ Métodos por referencia => Métodos Estáticos ------------------ */
+        // Cubo de la lista
+        List<Integer> numForCube = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        // Aplicando métodos por refeencia => Clase/instancia::method
+        numForCube.stream().map(Main::cube).forEach(System.out::println);
+
+        /* ------------------ Métodos por referencia => Métodos de instancia ------------------ */
+        calculator calculator = new calculator(); // instancia
+        System.out.println("*******************");
+        numForCube.stream().map(calculator::toCube).forEach(System.out::println);
+
+        /* ------------------ Métodos por referencia => Métodos de instancia de un objeto arbitrario ------------------ */
+        // Nombre de todos los usuarios
+        System.out.println("*******************");
+        users.stream().map(User::getUsername).forEach(System.out::println);
+
+        /* ------------------ Métodos por referencia => Constructor por referencia ------------------ */
+        // Crear nuevos usuarios e imprimir los nombres
+        System.out.println("*******************");
+        IUser iUser = User::new;
+        User user1 = iUser.create("Memo 1", 12);
+        User user2 = iUser.create("Memo 2", 21);
+        User user3 = iUser.create("Memo 3", 40);
+        User user4 = iUser.create("Memo 4", 56);
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+        users.add(user4);
+        users.stream().map(User::getUsername).forEach(System.out::println);
+    }
+
+    public static int cube(int number) {
+        return number * number * number;
     }
 
 }
