@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title th:text="${titulo}"></title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous" />
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Spring Boot JPA</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="#">Home</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/listar}">Clientes</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/form}">Nuevo
+							Cliente</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<h1 th:text="${titulo}"></h1>
+		<!-- Mensajes de error -->
+		<!-- th:remove="tag" => Remover el div -->
+		<div th:object="${cliente}" th:remove="tag">
+			<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+				<li th:each="error: ${#fields.errors('*')}" th:text="${error}"></li>
+			</ul>
+		</div>
+
+		<!-- Formulario -->
+		<form th:action="@{/form}" th:object="${cliente}" method="post">
+			<!-- Nombre -->
+			<div class="row mb-3">
+				<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+				<div class="col-sm-10">
+					<input th:field="*{nombre}" type="text" class="form-control"
+						id="nombre" th:errorClass="'form-control alert-danger'" /> <small
+						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+						class="form-text text-danger"></small>
+				</div>
+			</div>
+			<!-- Apellido -->
+			<div class="row mb-3">
+				<label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
+				<div class="col-sm-10">
+					<input th:field="*{apellido}" type="text" class="form-control"
+						id="apellido" th:errorClass="'form-control alert-danger'" /> <small
+						th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
+						class="form-text text-danger"></small>
+				</div>
+			</div>
+			<!-- Correo -->
+			<div class="row mb-3">
+				<label for="email" class="col-sm-2 col-form-label">Correo</label>
+				<div class="col-sm-10">
+					<input th:field="*{email}" type="text" class="form-control"
+						id="email" th:errorClass="'form-control alert-danger'" /> <small
+						th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+						class="form-text text-danger"></small>
+				</div>
+			</div>
+			<!-- Fecha de creacion-->
+			<div class="row mb-3">
+				<label for="createAt" class="col-sm-2 col-form-label">Fecha
+					de creación</label>
+				<div class="col-sm-10">
+					<input th:field="*{createAt}" type="text" class="form-control"
+						id="createAt" th:errorClass="'form-control alert-danger'" /> <small
+						th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}"
+						class="form-text text-danger"></small>
+				</div>
+			</div>
+			<!-- ID -->
+			<!-- <input th:field="*{id}" type="hidden"> -->
+
+			<button type="submit" class="btn btn-primary">Crear</button>
+
+		</form>
+	</div>
+
+</body>
+</html>
