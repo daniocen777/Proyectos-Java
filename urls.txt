@@ -19,3 +19,6 @@ Agregar las siguientes dependencias:
 	<artifactId>primefaces</artifactId>
 	<version>10.0.0</version>
 </dependency>
+
+******* Spring **********
+https://docs.spring.io/spring-data/jpa/docs/2.5.4/reference/html/#repositories
