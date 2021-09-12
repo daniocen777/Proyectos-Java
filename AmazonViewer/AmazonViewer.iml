@@ -14,14 +14,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="makefile.jar">
-        <CLASSES>
-          <root url="file:///Users/anahisalgado/eclipse-workspace/AmazonViewer/libs/makefile.jar" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" exported="" name="makefile" level="project" />
   </component>
 </module>
