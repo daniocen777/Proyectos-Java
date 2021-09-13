@@ -2,6 +2,11 @@ package com.anncode.amazonviewer.model;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que hereda de {@link Movie}
+ *
+ * @see Film
+ */
 public class Chapter extends Movie {
 
 
