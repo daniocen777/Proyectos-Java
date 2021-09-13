@@ -1,9 +1,17 @@
 package com.anncode.amazonviewer.model;
 
-/*
-* Clase abstracta ya no puede generar instancias.
-* Se puede instancias a través de sus clases hijas
-*/
+/**
+ * <h1>Film</h1>
+ * Film es una clase padre abstracta.
+ * <p>
+ * Clase base de la familia Film, es abstracta (NO puede crearse instancias).
+ * Contiene el método abstracto {@code view()} que es obligatorio implementar
+ * para toda clase que pertenezca a la familia.
+ *
+ * @author danicode
+ * @version 1.1
+ * @since 2021
+ */
 public abstract class Film {
 
     private String title;
@@ -81,6 +89,8 @@ public abstract class Film {
         this.viewed = viewed;
     }
 
-    // Clase abstracta que las hijas tendrán que implementar obligatoriamente
+    /**
+     * {@code view()} es un método abstracto obligatorio de implementar
+     */
     public abstract void view();
 }

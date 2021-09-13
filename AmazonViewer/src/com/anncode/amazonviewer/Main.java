@@ -8,14 +8,23 @@ import com.anncode.amazonviewer.model.*;
 import com.anncode.makereport.Report;
 import com.anncode.util.AmazonUtil;
 
+/**
+ * <h1>AmazonViewer</h1>
+ * Programa que permite visualizar movies, series con sus capítulos (Chapters),
+ * Books y Megazines. Genera reportes generales con su fecha del día.
+ * <p>
+ * Exiten reglas, todos los elementos pueden ser vistos o leídos a excepción
+ * de los Megazines
+ * </p>
+ *
+ * @author Danicode
+ * @version 1.1
+ * @since 2021
+ */
 public class Main {
 
     public static void main(String[] args) {
-        // Instancia de clase abstracta (a través de su hija)
-//        Film film = new Movie("", "", "", 1, (short) 1999);
-//        film.view();
         showMenu();
-
     }
 
     public static void showMenu() {
