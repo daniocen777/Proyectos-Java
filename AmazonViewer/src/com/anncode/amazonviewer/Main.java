@@ -12,7 +12,8 @@ public class Main {
 
     public static void main(String[] args) {
         // Instancia de clase abstracta (a través de su hija)
-        Film film = new Movie("", "", "", 1, (short) 1999);
+//        Film film = new Movie("", "", "", 1, (short) 1999);
+//        film.view();
         showMenu();
 
     }
@@ -22,7 +23,7 @@ public class Main {
         do {
 
             System.out.println("BIENVENIDOS AMAZON VIEWER");
-            System.out.println("");
+            System.out.println("**********");
             System.out.println("Selecciona el número de la opción deseada");
             System.out.println("1. Movies");
             System.out.println("2. Series");
@@ -101,7 +102,7 @@ public class Main {
             }
             if (response > 0) {
                 Movie movieSelected = movies.get(response - 1);
-
+                movieSelected.view();
             }
 
 
@@ -168,18 +169,7 @@ public class Main {
 
             if (response > 0) {
                 Chapter chapterSelected = chaptersOfSerieSelected.get(response - 1);
-                chapterSelected.setViewed(true);
-                Date dateI = chapterSelected.startToSee(new Date());
-
-                for (int i = 0; i < 100000; i++) {
-                    System.out.println("..........");
-                }
-
-                //Termine de verla
-                chapterSelected.stopToSee(dateI, new Date());
-                System.out.println();
-                System.out.println("Viste: " + chapterSelected);
-                System.out.println("Por: " + chapterSelected.getTimeViewed() + " milisegundos");
+                chapterSelected.view();
             }
         } while (exit != 0);
     }
@@ -211,18 +201,7 @@ public class Main {
 
             if (response > 0) {
                 Book bookSelected = books.get(response - 1);
-                bookSelected.setReaded(true);
-                Date dateI = bookSelected.startToSee(new Date());
-
-                for (int i = 0; i < 100000; i++) {
-                    System.out.println("..........");
-                }
-
-                //Termine de verla
-                bookSelected.stopToSee(dateI, new Date());
-                System.out.println();
-                System.out.println("Leíste: " + bookSelected);
-                System.out.println("Por: " + bookSelected.getTimeReaded() + " milisegundos");
+                bookSelected.view();
             }
 
         } while (exit != 0);
