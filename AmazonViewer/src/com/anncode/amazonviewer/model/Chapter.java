@@ -75,7 +75,7 @@ public class Chapter extends Movie {
             }
         }
         if (chapterViewerCounter == chapters.size()) {
-            getSerie().setViewed(true);
+            getSerie().view();
         }
     }
 }

@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5ac7c9bf-0c5b-41c1-ae91-fc153f9fede3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/anncode/amazonviewer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/anncode/amazonviewer/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/anncode/amazonviewer/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/anncode/amazonviewer/model/Book.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/anncode/amazonviewer/model/Chapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/anncode/amazonviewer/model/Chapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/anncode/amazonviewer/model/Serie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/anncode/amazonviewer/model/Serie.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
