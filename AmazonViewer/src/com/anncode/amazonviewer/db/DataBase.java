@@ -15,10 +15,13 @@ public class DataBase {
     public static final String TMOVIE_YEAR = "year";
     // Mapeando tabla "user"
     public static final String TUSER = "user";
-    public static final String TUSER_ID = "id";
-    public static final String TUSER_NAME = "name";
+    public static final int TUSER_ID_USUARIO = 1;
     // Mapeando tabla "material"
     public static final String TMATERIAL = "material";
-    public static final String TMATERIAL_ID = "id";
-    public static final String TMATERIAL_NAME = "name";
+    public static final int[] TMATERIAL_IDS = {1, 2, 3, 4, 5};
+    // Mapeando tabla "viewed"
+    public static final String TVIEWED = "viewed";
+    public static final String TVIEWED_ID_MATERIAL = "id_material";
+    public static final String TVIEWED_ID_ELEMENT = "id_element";
+    public static final String TVIEWED_ID_USER = "id_user";
 }

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5ac7c9bf-0c5b-41c1-ae91-fc153f9fede3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/anncode/amazonviewer/db/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/anncode/amazonviewer/db/DataBase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +14,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -28,7 +30,9 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1y2zFqF8dbLKZl15tMq0OYDtjNJ" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
