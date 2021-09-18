@@ -3,6 +3,7 @@ package com.anncode.amazonviewer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.anncode.amazonviewer.model.*;
 import com.anncode.makereport.Report;
@@ -84,7 +85,7 @@ public class Main {
         } while (exit != 0);
     }
 
-    static ArrayList<Movie> movies = Movie.makeMoviesList();
+    static List<Movie> movies = Movie.makeMoviesList();
 
     public static void showMovies() {
         int exit = 1;
