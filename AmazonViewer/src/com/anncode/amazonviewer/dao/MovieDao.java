@@ -1,6 +1,6 @@
 package com.anncode.amazonviewer.dao;
 
-import com.anncode.amazonviewer.db.IDBConnection;
+impexecuteUpdateort com.anncode.amazonviewer.db.IDBConnection;
 import com.anncode.amazonviewer.model.Movie;
 
 import static com.anncode.amazonviewer.db.DataBase.*;
@@ -22,7 +22,26 @@ import java.util.List;
  * </p>
  */
 public interface MovieDao extends IDBConnection {
+    // 8:00
     default Movie setMovieViewer(Movie movie) {
+        StringBuilder sql = new StringBuilder();
+        String message = "";
+        sql.delete(0, sql.length())
+                .append("INSERT INTO " + TVIEWED)
+                .append("(" + TVIEWED_ID_MATERIAL + "," + TVIEWED_ID_ELEMENT + "," + TVIEWED_ID_USER + ")")
+                .append(" VALUES(?, ?, ?)");
+        try (Connection connection = connectToDB();
+             PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+            ps.setInt(1, TMATERIAL_IDS[0]);
+            ps.setInt(2, movie.getId());
+            ps.setInt(3, TUSER_ID_USUARIO);
+
+            int ctos = ps.executeUpdate(); // Para insert, delete y update
+            message = (ctos != 0) ? "OK" : "Error ==> setMovieViewer | executeUpdate()";
+            System.out.println(message);
+        } catch (SQLException e) {
+            System.out.println("Error ==>" + e.getMessage());
+        }
         return movie;
     }
 
