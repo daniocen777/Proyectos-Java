@@ -1,6 +1,9 @@
 package com.danicode.springboot.backend.apirest.springbootbackendapirest.models.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,11 +16,16 @@ public class Cliente implements Serializable {
     private Long id;
 
     @Column(nullable = false)
+    @NotEmpty
+    @Size(min = 4)
     private String nombre;
 
+    @NotEmpty
     private String apellido;
 
     @Column(nullable = false, unique = true)
+    @NotEmpty
+    @Email
     private String email;
 
     @Column(name = "create_at")
