@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
@@ -39,7 +41,6 @@ public class ClienteRestController {
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-
         if (cliente == null) {
             response.put("mensaje", "El cliente con ID: ".concat(id.toString()).concat(" no existe"));
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
@@ -48,9 +49,17 @@ public class ClienteRestController {
     }
 
     @PostMapping({"/", ""})
-    public ResponseEntity<?> store(@RequestBody Cliente cliente) {
+    public ResponseEntity<?> store(@Valid @RequestBody Cliente cliente, BindingResult result) {
         Cliente clienteNuevo = null;
         Map<String, Object> response = new HashMap<>();
+        if (result.hasErrors()) {
+            List<String> errores = result.getFieldErrors()
+                    .stream()
+                    .map(error -> "El campo '" + error.getField() + "' " + error.getDefaultMessage())
+                    .collect(Collectors.toList());
+            response.put("errores", errores);
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+        }
         try {
             clienteNuevo = this.clienteService.save(cliente);
         } catch (DataAccessException e) {
@@ -67,10 +76,19 @@ public class ClienteRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Cliente cliente) {
+    public ResponseEntity<?> update(@Valid @RequestBody Cliente cliente, BindingResult result, @PathVariable Long id) {
         Cliente clienteActual = this.clienteService.findById(id);
         Cliente clienteActualizado = null;
         Map<String, Object> response = new HashMap<>();
+
+        if (result.hasErrors()) {
+            List<String> errores = result.getFieldErrors()
+                    .stream()
+                    .map(error -> "El campo '" + error.getField() + "' " + error.getDefaultMessage())
+                    .collect(Collectors.toList());
+            response.put("errores", errores);
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+        }
 
         if (clienteActual == null) {
             response.put("mensaje", "El cliente con ID: ".concat(id.toString()).concat(" no existe"));
