@@ -1,6 +1,7 @@
 package com.danicode.springboot.backend.apirest.springbootbackendapirest.controllers;
 
 import com.danicode.springboot.backend.apirest.springbootbackendapirest.models.entity.Cliente;
+import com.danicode.springboot.backend.apirest.springbootbackendapirest.models.entity.Region;
 import com.danicode.springboot.backend.apirest.springbootbackendapirest.models.services.IClienteService;
 import com.danicode.springboot.backend.apirest.springbootbackendapirest.models.services.IUploadService;
 import org.slf4j.Logger;
@@ -21,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,6 +121,8 @@ public class ClienteRestController {
             clienteActual.setApellido(cliente.getApellido());
             clienteActual.setNombre(cliente.getNombre());
             clienteActual.setEmail(cliente.getEmail());
+            // Actualizar la region
+            clienteActual.setRegion(cliente.getRegion());
 
             clienteActualizado = this.clienteService.save(clienteActual);
         } catch (DataAccessException e) {
@@ -199,5 +201,10 @@ public class ClienteRestController {
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
 
         return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+    }
+
+    @GetMapping({"/regiones"})
+    public List<Region> getRegiones() {
+        return this.clienteService.findAllRegiones();
     }
 }
