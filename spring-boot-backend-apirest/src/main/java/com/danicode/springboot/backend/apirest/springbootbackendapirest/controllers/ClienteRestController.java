@@ -165,7 +165,6 @@ public class ClienteRestController {
             String nombreArchivo = "";
             try {
                 nombreArchivo = this.uploadService.guardarImage(archivo);
-                Files.copy(archivo.getInputStream(), path);
             } catch (IOException e) {
                 response.put("mensaje", "Error de servidor (upload): *** "
                         .concat(e.getMessage())
