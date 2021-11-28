@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
@@ -40,6 +41,7 @@ public class Cliente implements Serializable {
      FetchType.LAZY => Solo se carga cuando se invoca a region. Ademas
      genera un proxy con varios atributos que no se necesitan "hibernateLazyInitializer"
     // hibernateLazyInitializer */
+    @NotNull(message = "Debe ingresar la región")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "hibernateLazyInitializer"})
