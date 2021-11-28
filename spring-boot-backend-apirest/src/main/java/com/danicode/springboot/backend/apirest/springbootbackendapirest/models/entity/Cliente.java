@@ -1,5 +1,7 @@
 package com.danicode.springboot.backend.apirest.springbootbackendapirest.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -33,6 +35,15 @@ public class Cliente implements Serializable {
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
+
+    /* Relacion con Region: Muchos cliente pertenecen a una region |
+     FetchType.LAZY => Solo se carga cuando se invoca a region. Ademas
+     genera un proxy con varios atributos que no se necesitan "hibernateLazyInitializer"
+    // hibernateLazyInitializer */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "hibernateLazyInitializer"})
+    private Region region;
 
     @PrePersist
     public void prePersist() {
@@ -85,5 +96,13 @@ public class Cliente implements Serializable {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
     }
 }
