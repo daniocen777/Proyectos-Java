@@ -1,10 +1,15 @@
 package com.danicode.blog.service;
 
 import com.danicode.blog.dto.PublicacionDTO;
+import com.danicode.blog.dto.PublicacionResponse;
 import com.danicode.blog.entity.Publicacion;
 import com.danicode.blog.exception.ResourceNotFoundException;
 import com.danicode.blog.repository.IPublicacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,9 +33,20 @@ public class PublicacionServiceImpl implements IPublicacionService {
     }
 
     @Override
-    public List<PublicacionDTO> obtenerPublicaciones() {
-        List<Publicacion> publicaciones = publicacionRepository.findAll();
-        return publicaciones.stream().map(publicacion -> mapearADTO(publicacion)).collect(Collectors.toList());
+    public PublicacionResponse obtenerPublicaciones(int page, int size, String sortBy, String sortDir) {
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<Publicacion> publicaciones = publicacionRepository.findAll(pageable);
+        List<Publicacion> listaDePublicaciones = publicaciones.getContent();
+        List<PublicacionDTO> contenido = listaDePublicaciones.stream().map(publicacion -> mapearADTO(publicacion)).collect(Collectors.toList());
+        PublicacionResponse publicacionResponse = new PublicacionResponse();
+        publicacionResponse.setContenido(contenido);
+        publicacionResponse.setPage(publicaciones.getNumber());
+        publicacionResponse.setSize(publicaciones.getSize());
+        publicacionResponse.setTotalElements(publicaciones.getTotalElements());
+        publicacionResponse.setTotalPages(publicaciones.getTotalPages());
+        publicacionResponse.setLast(publicaciones.isLast());
+        return publicacionResponse;
     }
 
     @Override
@@ -47,6 +63,12 @@ public class PublicacionServiceImpl implements IPublicacionService {
         publicacion.setContenido(publicacionDTO.getContenido());
         Publicacion publicacionActualizada = publicacionRepository.save(publicacion);
         return mapearADTO(publicacionActualizada);
+    }
+
+    @Override
+    public void eliminarPublicacionPorId(long id) {
+        Publicacion publicacion = publicacionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Publicacion", "id", id));
+        publicacionRepository.delete(publicacion);
     }
 
     // convertir entidad a DTO
