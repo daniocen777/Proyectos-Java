@@ -5,8 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.UniqueConstraint;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "publicaciones", uniqueConstraints = {@UniqueConstraint(columnNames = "titulo")})
@@ -24,6 +28,10 @@ public class Publicacion {
 
     @Column(nullable = false)
     private String contenido;
+
+    // CascadeType.ALL & orphanRemoval => Cuando se elimine la publicacion, se elimine sus comentarios
+    @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Comentario> comentarios = new HashSet<Comentario>();
 
     public Publicacion() {
     }

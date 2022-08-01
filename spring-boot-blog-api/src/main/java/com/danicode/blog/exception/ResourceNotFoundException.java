@@ -1,6 +1,5 @@
 package com.danicode.blog.exception;
 
-import net.bytebuddy.implementation.bind.annotation.Super;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
