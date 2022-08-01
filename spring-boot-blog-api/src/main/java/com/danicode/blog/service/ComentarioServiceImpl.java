@@ -7,6 +7,7 @@ import com.danicode.blog.exception.BlogException;
 import com.danicode.blog.exception.ResourceNotFoundException;
 import com.danicode.blog.repository.IComentarioRepository;
 import com.danicode.blog.repository.IPublicacionRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class ComentarioServiceImpl implements IComentarioService {
+    // Para el mapeo
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     private IComentarioRepository comentarioRepository;
@@ -83,21 +87,14 @@ public class ComentarioServiceImpl implements IComentarioService {
     }
 
     private ComentarioDTO mapearADTO(Comentario comentario) {
-        ComentarioDTO comentarioDTO = new ComentarioDTO();
-        comentarioDTO.setId(comentario.getId());
-        comentarioDTO.setNombre(comentario.getNombre());
-        comentarioDTO.setEmail(comentario.getEmail());
-        comentarioDTO.setCuerpo(comentario.getCuerpo());
+
+        ComentarioDTO comentarioDTO = modelMapper.map(comentario, ComentarioDTO.class);
 
         return comentarioDTO;
     }
 
     private Comentario mapearAEntidad(ComentarioDTO comentarioDTO) {
-        Comentario comentario = new Comentario();
-        comentario.setId(comentarioDTO.getId());
-        comentario.setNombre(comentarioDTO.getNombre());
-        comentario.setEmail(comentarioDTO.getEmail());
-        comentario.setCuerpo(comentarioDTO.getCuerpo());
+        Comentario comentario = modelMapper.map(comentarioDTO, Comentario.class);
 
         return comentario;
     }

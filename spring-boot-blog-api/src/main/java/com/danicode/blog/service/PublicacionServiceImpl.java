@@ -5,6 +5,7 @@ import com.danicode.blog.dto.PublicacionResponse;
 import com.danicode.blog.entity.Publicacion;
 import com.danicode.blog.exception.ResourceNotFoundException;
 import com.danicode.blog.repository.IPublicacionRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +18,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class PublicacionServiceImpl implements IPublicacionService {
+    // Para el mapeo
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     private IPublicacionRepository publicacionRepository;
@@ -73,24 +77,25 @@ public class PublicacionServiceImpl implements IPublicacionService {
 
     // convertir entidad a DTO
     private PublicacionDTO mapearADTO(Publicacion publicacion) {
-        PublicacionDTO publicacionDTO = new PublicacionDTO();
-
-        publicacionDTO.setId(publicacion.getId());
-        publicacionDTO.setTitulo(publicacion.getTitulo());
-        publicacionDTO.setDescripcion(publicacion.getDescripcion());
-        publicacionDTO.setContenido(publicacion.getContenido());
+        PublicacionDTO publicacionDTO = modelMapper.map(publicacion, PublicacionDTO.class);
+        // com modelMapper ya no se requiere de esto
+        // PublicacionDTO publicacionDTO = new PublicacionDTO();
+        // publicacionDTO.setId(publicacion.getId());
+        // publicacionDTO.setTitulo(publicacion.getTitulo());
+        // publicacionDTO.setDescripcion(publicacion.getDescripcion());
+        // publicacionDTO.setContenido(publicacion.getContenido());
 
         return publicacionDTO;
     }
 
     // convertir DTO a entidad
     private Publicacion mapearAEntidad(PublicacionDTO publicacionDTO) {
-        Publicacion publicacion = new Publicacion();
-
-        publicacion.setId(publicacionDTO.getId());
-        publicacion.setTitulo(publicacionDTO.getTitulo());
-        publicacion.setDescripcion(publicacionDTO.getDescripcion());
-        publicacion.setContenido(publicacionDTO.getContenido());
+        Publicacion publicacion = modelMapper.map(publicacionDTO, Publicacion.class);
+        // Publicacion publicacion = new Publicacion();
+        // publicacion.setId(publicacionDTO.getId());
+        // publicacion.setTitulo(publicacionDTO.getTitulo());
+        // publicacion.setDescripcion(publicacionDTO.getDescripcion());
+        // publicacion.setContenido(publicacionDTO.getContenido());
 
         return publicacion;
     }
