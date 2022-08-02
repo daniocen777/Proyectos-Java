@@ -1,5 +1,7 @@
 package com.danicode.blog.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
@@ -30,6 +32,7 @@ public class Publicacion {
     private String contenido;
 
     // CascadeType.ALL & orphanRemoval => Cuando se elimine la publicacion, se elimine sus comentarios
+    @JsonBackReference
     @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comentario> comentarios = new HashSet<Comentario>();
 
@@ -73,5 +76,13 @@ public class Publicacion {
 
     public void setContenido(String contenido) {
         this.contenido = contenido;
+    }
+
+    public Set<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(Set<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 }

@@ -1,10 +1,13 @@
 package com.danicode.blog.dto;
 
+import java.util.Set;
+
 public class PublicacionDTO {
     private Long id;
     private String titulo;
     private String descripcion;
     private String contenido;
+    private Set<ComentarioDTO> comentarios;
 
     public PublicacionDTO() {
     }
@@ -46,5 +49,13 @@ public class PublicacionDTO {
 
     public void setContenido(String contenido) {
         this.contenido = contenido;
+    }
+
+    public Set<ComentarioDTO> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(Set<ComentarioDTO> comentarios) {
+        this.comentarios = comentarios;
     }
 }
