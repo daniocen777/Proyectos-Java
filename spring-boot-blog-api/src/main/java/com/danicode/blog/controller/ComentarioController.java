@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -35,13 +36,13 @@ public class ComentarioController {
     }
 
     @PostMapping("/{publicacionId}")
-    public ResponseEntity<ComentarioDTO> save(@PathVariable long publicacionId, @RequestBody ComentarioDTO comentarioDTO) {
+    public ResponseEntity<ComentarioDTO> save(@PathVariable long publicacionId, @Valid @RequestBody ComentarioDTO comentarioDTO) {
         return new ResponseEntity<>(comentarioService.crear(publicacionId, comentarioDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{publicacionId}/{comentarioId}")
     public ResponseEntity<ComentarioDTO> updateById(@PathVariable Long publicacionId, @PathVariable Long comentarioId,
-                                                    @RequestBody ComentarioDTO comentarioDTO) {
+                                                    @Valid @RequestBody ComentarioDTO comentarioDTO) {
 
         return new ResponseEntity<>(comentarioService.actualizarComentario(publicacionId, comentarioId, comentarioDTO),
                 HttpStatus.OK);

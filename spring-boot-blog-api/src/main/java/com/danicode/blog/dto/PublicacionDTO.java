@@ -1,11 +1,18 @@
 package com.danicode.blog.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 public class PublicacionDTO {
     private Long id;
+    @NotEmpty(message = "Título no debe ser un campo vacío")
+    @Size(min = 2, message = "Titulo debe contener al menos 2 caracteres")
     private String titulo;
+    @NotEmpty(message = "Descripción no debe ser un campo vacío")
+    @Size(min = 10, message = "Descripción debe contener al menos 10 caracteres")
     private String descripcion;
+    @NotEmpty(message = "Contenido no debe ser un campo vacío")
     private String contenido;
     private Set<ComentarioDTO> comentarios;
 
