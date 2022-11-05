@@ -1,7 +1,7 @@
 package com.pe.test.pacientes.controller;
 
 import com.pe.test.pacientes.entities.Ubigeo;
-import com.pe.test.pacientes.services.UbigeoMyBatisRepository;
+import com.pe.test.pacientes.services.IUbigeoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -22,14 +22,14 @@ import java.util.stream.Collectors;
 public class UbigeoController {
 
     @Autowired
-    UbigeoMyBatisRepository repository;
+    private IUbigeoService ubigeoService;
 
     @GetMapping({"/", "", "/all"})
     public ResponseEntity<?> getAll() {
         Map<String, Object> response = new HashMap<>();
         List<Ubigeo> ubigeo = new ArrayList<>();
         try {
-            ubigeo = this.repository.findAll();
+            ubigeo = this.ubigeoService.findAll();
         } catch (DataAccessException e) {
             response.put("mensaje", "Error de servidor '/ubigeo' (getAll): *** "
                     .concat(e.getMessage())
@@ -47,7 +47,7 @@ public class UbigeoController {
         List<Ubigeo> ubigeo = new ArrayList<>();
         List<Ubigeo> filter = new ArrayList<>();
         try {
-            ubigeo = this.repository.findAll();
+            ubigeo = this.ubigeoService.findAll();
             filter = ubigeo.stream().filter(u -> u.getCodigoDepartamento().equalsIgnoreCase(dep)).collect(Collectors.toList());
         } catch (DataAccessException e) {
             response.put("mensaje", "Error de servidor '/departamento?' (getByDepartment): *** "
@@ -70,7 +70,7 @@ public class UbigeoController {
         List<Ubigeo> ubigeo = new ArrayList<>();
         List<Ubigeo> filter = new ArrayList<>();
         try {
-            ubigeo = this.repository.findAll();
+            ubigeo = this.ubigeoService.findAll();
             filter = ubigeo.stream().
                     filter(u -> u.getCodigoDepartamento().equalsIgnoreCase(dep))
                     .filter(u -> u.getCodigoProvincia().equalsIgnoreCase(pro))

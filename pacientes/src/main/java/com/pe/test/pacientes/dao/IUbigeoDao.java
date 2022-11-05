@@ -1,5 +1,4 @@
-package com.pe.test.pacientes.services;
-
+package com.pe.test.pacientes.dao;
 import com.pe.test.pacientes.entities.Ubigeo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
@@ -9,7 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 @Mapper
-public interface UbigeoMyBatisRepository {
+public interface IUbigeoDao {
 
     @Results(value = {
             @Result(property = "codigoUbigeo", column = "codigo_ubigeo"),
@@ -39,5 +38,4 @@ public interface UbigeoMyBatisRepository {
     @Select("SELECT descripcion_departamento, descripcion_provincia, descripcion_distrito, fl_estado, codigo_ubigeo, codigo_departamento, codigo_provincia, codigo_distrito\n" +
             "FROM \"Admision\".tc_ubigeo where codigo_departamento = #{codigoDepartamento};")
     public List<Ubigeo> findByDepartment(String codigoDepartamento);
-
 }

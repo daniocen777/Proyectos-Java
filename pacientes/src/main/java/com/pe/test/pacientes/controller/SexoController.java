@@ -1,7 +1,7 @@
 package com.pe.test.pacientes.controller;
 
 import com.pe.test.pacientes.entities.Sexo;
-import com.pe.test.pacientes.services.SexoMyBatisRepository;
+import com.pe.test.pacientes.services.ISexoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -20,14 +20,14 @@ import java.util.Map;
 public class SexoController {
 
     @Autowired
-    private SexoMyBatisRepository repository;
+    private ISexoService sexoService;
 
     @GetMapping({"/", "", "/all"})
     public ResponseEntity<?> getAll() {
         Map<String, Object> response = new HashMap<>();
         List<Sexo> sexo = new ArrayList<>();
         try {
-            sexo = this.repository.findAll();
+            sexo = this.sexoService.findAll();
         } catch (DataAccessException e) {
             response.put("mensaje", "Error de servidor '/sexo' (getAll): *** "
                     .concat(e.getMessage())

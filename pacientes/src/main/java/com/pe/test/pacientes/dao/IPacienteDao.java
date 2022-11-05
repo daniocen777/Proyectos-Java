@@ -1,4 +1,4 @@
-package com.pe.test.pacientes.services;
+package com.pe.test.pacientes.dao;
 
 import com.pe.test.pacientes.entities.Paciente;
 import org.apache.ibatis.annotations.Mapper;
@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Insert;
 import java.util.List;
 
 @Mapper
-public interface PacienteMyBatisRepository {
+public interface IPacienteDao {
 
     @Results(value = {
             @Result(property = "idPaciente", column = "id_paciente"),
@@ -28,12 +28,6 @@ public interface PacienteMyBatisRepository {
     @Select("SELECT id_paciente, id_tipo_docide, no_docide, no_apepat, no_apemat, no_nombres, id_sexo, fe_nacimiento, no_lugar_nacimiento, no_direccion, co_ubigeo\n" +
             "FROM \"Admision\".tb_paciente;\n")
     public List<Paciente> findAll();
-
-    /*
-    INSERT INTO "Admision".tb_paciente
-(id_tipo_docide, no_docide, no_apepat, no_apemat, no_nombres, id_sexo, fe_nacimiento, no_lugar_nacimiento, no_direccion, co_ubigeo)
-VALUES(1, '45542900', 'Ochoa', 'Chavarria', 'Yonatan Daniel', 1, '1989/02/13', 'Lima', 'Las aCACIAS 157', '150112');
-    * */
 
     @Insert("INSERT INTO \"Admision\".tb_paciente\n" +
             "(id_tipo_docide, no_docide, no_apepat, no_apemat, no_nombres, id_sexo, fe_nacimiento, no_lugar_nacimiento, no_direccion, co_ubigeo)\n" +

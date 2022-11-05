@@ -1,4 +1,4 @@
-package com.pe.test.pacientes.services;
+package com.pe.test.pacientes.dao;
 
 import com.pe.test.pacientes.entities.Parentesco;
 import org.apache.ibatis.annotations.Mapper;
@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 @Mapper
-public interface ParentescoMyBatisRepository {
+public interface IParentescoDao {
 
     @Results(value = {
             @Result(property = "idParentesco", column = "id_parentesco"),

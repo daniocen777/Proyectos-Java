@@ -1,4 +1,4 @@
-package com.pe.test.pacientes.services;
+package com.pe.test.pacientes.dao;
 
 import com.pe.test.pacientes.entities.TipoDocumentoIdentidad;
 import org.apache.ibatis.annotations.Mapper;
@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 @Mapper
-public interface TipoDocumentoIdentidadMyBatisRepository {
+public interface ITipoDocumentoDao {
 
     @Results(value = {
             @Result(property = "idTipoDocumentoIdentidad", column = "id_tipo_documento_identidad"),

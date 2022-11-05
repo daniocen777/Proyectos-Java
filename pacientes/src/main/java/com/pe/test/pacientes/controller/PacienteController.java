@@ -2,7 +2,7 @@ package com.pe.test.pacientes.controller;
 
 import com.pe.test.pacientes.entities.Paciente;
 
-import com.pe.test.pacientes.services.PacienteMyBatisRepository;
+import com.pe.test.pacientes.services.IPacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -12,25 +12,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("/paciente")
 public class PacienteController {
 
     @Autowired
-    private PacienteMyBatisRepository repository;
+    private IPacienteService pacienteService;
 
     @GetMapping({"/", "", "/all"})
     public ResponseEntity<?> getAll() {
         Map<String, Object> response = new HashMap<>();
         List<Paciente> paciente = new ArrayList<>();
         try {
-            paciente = this.repository.findAll();
+            paciente = this.pacienteService.findAll();
         } catch (DataAccessException e) {
             response.put("mensaje", "Error de servidor '/paciente' (getAll): *** "
                     .concat(e.getMessage())
@@ -47,9 +50,9 @@ public class PacienteController {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            pacienteNuevo = this.repository.insert(paciente);
+            pacienteNuevo = this.pacienteService.insert(paciente);
         } catch (DataAccessException e) {
-            response.put("mensaje", "Error de servidor (store): *** "
+            response.put("mensaje", "Error de servidor (insert): *** "
                     .concat(e.getMessage())
                     .concat(" *** :")
                     .concat(e.getMostSpecificCause().getMessage()));
@@ -57,7 +60,6 @@ public class PacienteController {
         }
 
         response.put("mensaje", "Paciente creado satisfactoriamente");
-        response.put("cliente", pacienteNuevo);
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
 }

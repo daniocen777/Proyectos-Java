@@ -2,7 +2,7 @@ package com.pe.test.pacientes.controller;
 
 import com.pe.test.pacientes.entities.Parentesco;
 
-import com.pe.test.pacientes.services.ParentescoMyBatisRepository;
+import com.pe.test.pacientes.services.IParentescoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -21,14 +21,14 @@ import java.util.Map;
 public class ParentescoController {
 
     @Autowired
-    private ParentescoMyBatisRepository repository;
+    private IParentescoService parentescoService;
 
     @GetMapping({"/", "", "/all"})
     public ResponseEntity<?> getAll() {
         Map<String, Object> response = new HashMap<>();
         List<Parentesco> parentesco = new ArrayList<>();
         try {
-            parentesco = this.repository.findAll();
+            parentesco = this.parentescoService.findAll();
         } catch (DataAccessException e) {
             response.put("mensaje", "Error de servidor 'ubigeo' (getAll): *** "
                     .concat(e.getMessage())
