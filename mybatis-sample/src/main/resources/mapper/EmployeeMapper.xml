@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.danicode.mybatis.mapper.EmployeeMapper">
+    <!-- Lista de empleados -->
     <resultMap type="com.danicode.mybatis.model.Employee" id="employees">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
@@ -15,5 +16,15 @@
     </resultMap>
     <select id="findEmployee" resultMap="employees">
         select * from fn_ad_select_employees()
+    </select>
+    <!-- Insertar empleado -->
+    <resultMap type="com.danicode.mybatis.model.response.OkResponse" id="confirmResultMap">
+        <result property="ok" column="ok"/>
+        <result property="message" column="message"/>
+        <result property="result" column="result"/>
+    </resultMap>
+
+    <select id="insertEmployee" resultMap="confirmResultMap">
+        select * from fn_insert_employee_2(#{employeeJson})
     </select>
 </mapper>

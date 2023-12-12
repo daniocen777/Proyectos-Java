@@ -1,6 +1,11 @@
 package com.danicode.mybatis.model;
 
-public class Employee {
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Employee implements Serializable {
     private String id;
     private String name;
     private String nrc;

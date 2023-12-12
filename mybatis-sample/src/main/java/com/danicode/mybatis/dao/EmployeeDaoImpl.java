@@ -2,6 +2,8 @@ package com.danicode.mybatis.dao;
 
 import com.danicode.mybatis.mapper.EmployeeMapper;
 import com.danicode.mybatis.model.Employee;
+import com.danicode.mybatis.model.request.InsertEmployeeRequest;
+import com.danicode.mybatis.model.response.OkResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +17,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public List<Employee> findEmployee() {
         return employeeMapper.findEmployee();
+    }
+
+    @Override
+    public OkResponse insertEmployee(InsertEmployeeRequest insertEmployeeRequest) {
+        OkResponse response = employeeMapper.insertEmployee(insertEmployeeRequest.getEmployeeJson());
+        return response;
     }
 }
