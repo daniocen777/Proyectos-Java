@@ -7,6 +7,7 @@ import com.danicode.app.repositories.IUserRepository;
 import com.danicode.app.requets.CreateUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +21,9 @@ import java.util.stream.Collectors;
 
 @RestController
 public class MainController {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private IUserRepository repository;
@@ -46,7 +50,7 @@ public class MainController {
 
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(createUserDTO.getUsername());
-        userEntity.setPassword(createUserDTO.getPassword());
+        userEntity.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
         userEntity.setEmail(createUserDTO.getEmail());
         userEntity.setRoles(roles);
 
