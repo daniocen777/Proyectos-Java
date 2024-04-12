@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 // Configurando las restrincciones desde el controlador (habilitar @EnableMethodSecurity en SecurityConfig)
 // @PreAuthorize()
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/method")
 // @PreAuthorize("denyAll()") // Por defecto, denegar acceso a todos
 public class TestAuthController {
 

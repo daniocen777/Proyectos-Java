@@ -25,7 +25,6 @@ public class Main {
 
     @Bean
     CommandLineRunner init() {
-        System.out.println("INICIO");
         return args -> {
             // Permisos
             PermissionEntity createPermission = new PermissionEntity();
@@ -42,22 +41,21 @@ public class Main {
 
             PermissionEntity refactorPermission = new PermissionEntity();
             refactorPermission.setName("REFACTOR");
-            System.out.println("TERMINO PERMISSIONS");
             // Roles
             RoleEntity roleAdmin = new RoleEntity();
-            roleAdmin.setRole(RoleEnum.ADMIN);
+            roleAdmin.setRoleEnum(RoleEnum.ADMIN);
             roleAdmin.setPermissions(Set.of(createPermission, readPermission, updatePermission, deletePermission));
 
             RoleEntity roleUser = new RoleEntity();
-            roleUser.setRole(RoleEnum.USER);
+            roleUser.setRoleEnum(RoleEnum.USER);
             roleUser.setPermissions(Set.of(createPermission, readPermission));
 
             RoleEntity roleInvited = new RoleEntity();
-            roleInvited.setRole(RoleEnum.INVITED);
+            roleInvited.setRoleEnum(RoleEnum.INVITED);
             roleInvited.setPermissions(Set.of(readPermission));
 
             RoleEntity roleDeveloper = new RoleEntity();
-            roleDeveloper.setRole(RoleEnum.DEVELOPER);
+            roleDeveloper.setRoleEnum(RoleEnum.DEVELOPER);
             roleDeveloper.setPermissions(Set.of(createPermission,
                     readPermission,
                     updatePermission,

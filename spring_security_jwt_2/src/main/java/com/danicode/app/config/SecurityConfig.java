@@ -1,6 +1,9 @@
 package com.danicode.app.config;
 
+import com.danicode.app.config.filter.JwtTokenValidator;
 import com.danicode.app.service.UserDetailsServiceImpl;
+import com.danicode.app.utils.JwtUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,9 +17,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -24,9 +27,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
     // Segun la imagen, primero configurar SecurityFilterChain
-
-
     //1° FORMA
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -40,21 +44,23 @@ public class SecurityConfig {
                 .authorizeHttpRequests(http -> {
                     // endpoints publicos
                     http.requestMatchers(
-                                    new AntPathRequestMatcher("/auth/get", HttpMethod.GET.name()))
+                                    new AntPathRequestMatcher("/auth/**", HttpMethod.POST.name()))
                             .permitAll();
                     // endpoints privados
                     http.requestMatchers(
-                                    new AntPathRequestMatcher("/auth/post", HttpMethod.POST.name()))
+                                    new AntPathRequestMatcher("/method/post", HttpMethod.POST.name()))
                             .hasAnyAuthority("CREATE", "READ");
                     http.requestMatchers(
-                                    new AntPathRequestMatcher("/auth/patch", HttpMethod.PATCH.name()))
+                                    new AntPathRequestMatcher("/method/patch", HttpMethod.PATCH.name()))
                             .hasAuthority("REFACTOR");
                     http.requestMatchers(
-                                    new AntPathRequestMatcher("/auth/put", HttpMethod.PUT.name()))
+                                    new AntPathRequestMatcher("/method/put", HttpMethod.PUT.name()))
                             .hasAnyRole("ADMIN", "DEVELOPER");
                     // endpoints NO ESPECIFICADOS
                     http.anyRequest().denyAll();
                 })
+                // Filtros propios => Validar token antes de BasicAuthenticationFilter
+                .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class)
                 .build();
     }
 

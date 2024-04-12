@@ -28,7 +28,7 @@ public class RoleEntity {
 
     @Column(name = "role_name")
     @Enumerated(EnumType.STRING)
-    private RoleEnum role;
+    private RoleEnum roleEnum;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "roles_permissions",
@@ -39,9 +39,9 @@ public class RoleEntity {
     public RoleEntity() {
     }
 
-    public RoleEntity(Long id, RoleEnum role, Set<PermissionEntity> permissions) {
+    public RoleEntity(Long id, RoleEnum roleEnum, Set<PermissionEntity> permissions) {
         this.id = id;
-        this.role = role;
+        this.roleEnum = roleEnum;
         this.permissions = permissions;
     }
 
@@ -53,12 +53,12 @@ public class RoleEntity {
         this.id = id;
     }
 
-    public RoleEnum getRole() {
-        return role;
+    public RoleEnum getRoleEnum() {
+        return roleEnum;
     }
 
-    public void setRole(RoleEnum role) {
-        this.role = role;
+    public void setRoleEnum(RoleEnum roleEnum) {
+        this.roleEnum = roleEnum;
     }
 
     public Set<PermissionEntity> getPermissions() {
