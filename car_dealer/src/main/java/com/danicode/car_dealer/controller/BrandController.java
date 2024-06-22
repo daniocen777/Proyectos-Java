@@ -1,6 +1,6 @@
 package com.danicode.car_dealer.controller;
 
-import com.danicode.car_dealer.domain.pojo.Brand;
+import com.danicode.car_dealer.domain.dto.Brand;
 import com.danicode.car_dealer.domain.service.IBrandService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.danicode.car_dealer.domain.service;
 
-import com.danicode.car_dealer.domain.pojo.Brand;
+import com.danicode.car_dealer.domain.dto.Brand;
 import com.danicode.car_dealer.domain.repository.IBrandRepository;
 import org.springframework.stereotype.Service;
 

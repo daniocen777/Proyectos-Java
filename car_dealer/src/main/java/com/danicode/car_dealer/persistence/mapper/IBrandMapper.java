@@ -1,6 +1,6 @@
 package com.danicode.car_dealer.persistence.mapper;
 
-import com.danicode.car_dealer.domain.pojo.Brand;
+import com.danicode.car_dealer.domain.dto.Brand;
 import com.danicode.car_dealer.persistence.entity.BrandEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

@@ -1,4 +1,4 @@
-package com.danicode.car_dealer.domain.pojo;
+package com.danicode.car_dealer.domain.dto;
 
 public class Brand {
 

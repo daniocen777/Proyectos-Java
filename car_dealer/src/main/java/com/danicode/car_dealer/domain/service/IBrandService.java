@@ -1,6 +1,6 @@
 package com.danicode.car_dealer.domain.service;
 
-import com.danicode.car_dealer.domain.pojo.Brand;
+import com.danicode.car_dealer.domain.dto.Brand;
 
 import java.util.List;
 import java.util.Optional;
