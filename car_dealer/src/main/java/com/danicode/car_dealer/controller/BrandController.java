@@ -1,7 +1,7 @@
 package com.danicode.car_dealer.controller;
 
 import com.danicode.car_dealer.domain.dto.Brand;
-import com.danicode.car_dealer.domain.service.IBrandService;
+import com.danicode.car_dealer.domain.usecase.IBrandUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,26 +19,26 @@ import java.util.List;
 @RequestMapping("/brands")
 public class BrandController {
 
-    private final IBrandService service;
+    private final IBrandUseCase useCase;
 
-    public BrandController(IBrandService service) {
-        this.service = service;
+    public BrandController(IBrandUseCase useCase) {
+        this.useCase = useCase;
     }
 
     @GetMapping
     public ResponseEntity<List<Brand>> getAll() {
-        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(useCase.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Brand> getBrand(@PathVariable Long id) {
-        return ResponseEntity.of(service.getBrand(id));
+        return ResponseEntity.of(useCase.getBrand(id));
     }
 
     @PostMapping
     public ResponseEntity<Brand> save(@RequestBody Brand brand) {
         try {
-            return new ResponseEntity<>(service.save(brand), HttpStatus.CREATED);
+            return new ResponseEntity<>(useCase.save(brand), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
@@ -46,11 +46,11 @@ public class BrandController {
 
     @PatchMapping
     public ResponseEntity<Brand> update(@RequestBody Brand brand) {
-        return ResponseEntity.of(service.update(brand));
+        return ResponseEntity.of(useCase.update(brand));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-        return new ResponseEntity<>(service.delete(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(useCase.delete(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 }

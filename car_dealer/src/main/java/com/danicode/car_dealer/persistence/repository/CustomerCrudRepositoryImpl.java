@@ -2,6 +2,7 @@ package com.danicode.car_dealer.persistence.repository;
 
 import com.danicode.car_dealer.domain.dto.Customer;
 import com.danicode.car_dealer.domain.repository.ICustomerRepository;
+import com.danicode.car_dealer.persistence.crud.ICustomerCrudRepository;
 import com.danicode.car_dealer.persistence.entity.CustomerEntity;
 import com.danicode.car_dealer.persistence.mapper.ICustomerMapper;
 import org.springframework.stereotype.Repository;

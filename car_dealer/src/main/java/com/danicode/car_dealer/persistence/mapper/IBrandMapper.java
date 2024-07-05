@@ -19,6 +19,7 @@ public interface IBrandMapper {
     Brand toBrand(BrandEntity brandEntity);
 
     @InheritInverseConfiguration
+    @Mapping(target = "carEntities", ignore = true)
     BrandEntity toBrandEntity(Brand brand);
 
     List<Brand> toBrandsList(List<BrandEntity> brandEntities);

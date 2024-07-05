@@ -1,13 +1,12 @@
-package com.danicode.car_dealer.domain.service;
+package com.danicode.car_dealer.domain.usecase;
 
-import com.danicode.car_dealer.domain.dto.Brand;
 import com.danicode.car_dealer.domain.dto.Customer;
 import com.danicode.car_dealer.domain.dto.response.CustomerResponse;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ICustomerService {
+public interface ICustomerUseCase {
 
     List<Customer> getAll();
 

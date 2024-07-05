@@ -2,13 +2,14 @@ package com.danicode.car_dealer.domain.service;
 
 import com.danicode.car_dealer.domain.dto.Brand;
 import com.danicode.car_dealer.domain.repository.IBrandRepository;
+import com.danicode.car_dealer.domain.usecase.IBrandUseCase;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BrandServiceImpl implements IBrandService {
+public class BrandServiceImpl implements IBrandUseCase {
 
     private final IBrandRepository brandRepository;
 

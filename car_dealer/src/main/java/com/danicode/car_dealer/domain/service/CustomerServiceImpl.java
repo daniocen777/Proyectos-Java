@@ -4,6 +4,7 @@ import com.danicode.car_dealer.core.exception.EmailException;
 import com.danicode.car_dealer.domain.dto.Customer;
 import com.danicode.car_dealer.domain.dto.response.CustomerResponse;
 import com.danicode.car_dealer.domain.repository.ICustomerRepository;
+import com.danicode.car_dealer.domain.usecase.ICustomerUseCase;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CustomerServiceImpl implements ICustomerService {
+public class CustomerServiceImpl implements ICustomerUseCase {
 
     private final ICustomerRepository repository;
 

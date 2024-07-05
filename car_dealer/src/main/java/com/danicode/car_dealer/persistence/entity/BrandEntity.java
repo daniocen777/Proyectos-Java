@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
+import javax.persistence.OneToMany;
 import javax.persistence.GenerationType;
+import java.util.List;
 
 @Entity
 @Table(name = "brand")
@@ -15,6 +17,9 @@ public class BrandEntity {
     private Long id;
 
     private String description;
+
+    @OneToMany(mappedBy = "brandEntity")
+    private List<CarEntity> carEntities;
 
     public BrandEntity() {
     }
@@ -33,5 +38,13 @@ public class BrandEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<CarEntity> getCarEntities() {
+        return carEntities;
+    }
+
+    public void setCarEntities(List<CarEntity> carEntities) {
+        this.carEntities = carEntities;
     }
 }

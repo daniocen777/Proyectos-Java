@@ -2,6 +2,7 @@ package com.danicode.car_dealer.persistence.repository;
 
 import com.danicode.car_dealer.domain.dto.Brand;
 import com.danicode.car_dealer.domain.repository.IBrandRepository;
+import com.danicode.car_dealer.persistence.crud.IBrandCrudRepository;
 import com.danicode.car_dealer.persistence.entity.BrandEntity;
 import com.danicode.car_dealer.persistence.mapper.IBrandMapper;
 import org.springframework.stereotype.Repository;
