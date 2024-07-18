@@ -18,6 +18,9 @@ public class MovieEntity {
     @Column(name = "movie_id")
     private Long movieId;
 
+    @Column(name = "producer_id")
+    private Long producerId;
+
     private String title;
 
     private Integer duration;
