@@ -18,4 +18,8 @@ public class ProducerService {
     public List<Producer> getAll() {
         return this.repository.getAllProducers();
     }
+
+    public Producer save(Producer producer) {
+        return repository.save(producer);
+    }
 }

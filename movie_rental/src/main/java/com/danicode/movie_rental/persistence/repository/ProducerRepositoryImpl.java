@@ -1,7 +1,6 @@
 package com.danicode.movie_rental.persistence.repository;
 
 import com.danicode.movie_rental.domain.dto.pojo.Producer;
-import com.danicode.movie_rental.domain.dto.response.ProducerResponse;
 import com.danicode.movie_rental.domain.repository.ProducerRepository;
 import com.danicode.movie_rental.persistence.crud.ProducerCrudRepository;
 import com.danicode.movie_rental.persistence.entity.ProducerEntity;
@@ -26,5 +25,11 @@ public class ProducerRepositoryImpl implements ProducerRepository {
     public List<Producer> getAllProducers() {
         List<ProducerEntity> producerEntities = (List<ProducerEntity>) repository.findAll();
         return mapper.toProducersList(producerEntities);
+    }
+
+    @Override
+    public Producer save(Producer producer) {
+        ProducerEntity producerEntity = mapper.toProducerEntity(producer);
+        return mapper.toProducer(repository.save(producerEntity));
     }
 }
