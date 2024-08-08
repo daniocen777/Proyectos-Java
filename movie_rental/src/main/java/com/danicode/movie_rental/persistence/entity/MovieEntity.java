@@ -38,6 +38,15 @@ public class MovieEntity {
         return movieId;
     }
 
+
+    public Long getProducerId() {
+        return producerId;
+    }
+
+    public void setProducerId(Long producerId) {
+        this.producerId = producerId;
+    }
+
     public void setMovieId(Long movieId) {
         this.movieId = movieId;
     }
@@ -73,4 +82,5 @@ public class MovieEntity {
     public void setProducer(ProducerEntity producer) {
         this.producer = producer;
     }
+
 }

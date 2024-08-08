@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -64,5 +67,43 @@ public class ProducerController {
         apiResponse.setResults(producerInsertResult);
 
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<Producer>> getProducerById(@PathVariable("id") Long producerId) {
+        ApiResponse apiResponse = new ApiResponse();
+        Producer producer = this.service.getProducerById(producerId);
+        if (producer == null) {
+            apiResponse.setStatus("Error");
+            apiResponse.setResults(null);
+            apiResponse.setErrors(List.of(new ErrorDTO("Error", "El productor no fue en contrado")));
+
+            return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+        }
+
+        apiResponse.setStatus("OK");
+        apiResponse.setErrors(Collections.emptyList());
+        apiResponse.setResults(producer);
+
+        return new ResponseEntity<>(apiResponse, HttpStatus.FOUND);
+    }
+
+    @GetMapping("/company")
+    public ResponseEntity<ApiResponse<Producer>> getProducerByName(@RequestParam("name") String companyName) {
+        ApiResponse apiResponse = new ApiResponse();
+        Producer producer = this.service.getProducerByCompanyName(companyName);
+        if (producer == null) {
+            apiResponse.setStatus("Error");
+            apiResponse.setResults(null);
+            apiResponse.setErrors(List.of(new ErrorDTO("Error", "El productor no fue en contrado")));
+
+            return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+        }
+
+        apiResponse.setStatus("OK");
+        apiResponse.setErrors(Collections.emptyList());
+        apiResponse.setResults(producer);
+
+        return new ResponseEntity<>(apiResponse, HttpStatus.FOUND);
     }
 }

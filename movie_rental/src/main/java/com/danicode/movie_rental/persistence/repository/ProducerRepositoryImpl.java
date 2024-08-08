@@ -28,8 +28,21 @@ public class ProducerRepositoryImpl implements ProducerRepository {
     }
 
     @Override
-    public Producer save(Producer producer) {
+    public Producer getProducerById(Long producerId) {
+        ProducerEntity producerEntity = repository.findById(producerId).orElse(null);
+        return mapper.toProducer(producerEntity);
+    }
+
+    @Override
+    public Producer saveProducer(Producer producer) {
         ProducerEntity producerEntity = mapper.toProducerEntity(producer);
         return mapper.toProducer(repository.save(producerEntity));
     }
+
+    @Override
+    public Producer getProducerByName(String producerName) {
+        ProducerEntity producerEntity = repository.findByCompanyName(producerName);
+        return mapper.toProducer(producerEntity);
+    }
+
 }

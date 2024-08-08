@@ -7,5 +7,9 @@ import java.util.List;
 public interface ProducerRepository {
     List<Producer> getAllProducers();
 
-    Producer save(Producer producer);
+    Producer getProducerById(Long producerId);
+
+    Producer saveProducer(Producer producer);
+
+    Producer getProducerByName(String producerName);
 }
