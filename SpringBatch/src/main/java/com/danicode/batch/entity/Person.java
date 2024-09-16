@@ -2,6 +2,7 @@ package com.danicode.batch.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,11 +20,10 @@ public class Person {
 
     private Integer age;
 
-    public Person(Long id, String name, String lastname, Integer age) {
-        this.id = id;
-        this.name = name;
-        this.lastname = lastname;
-        this.age = age;
+    @Column(name = "insertion_date")
+    private String insertionDate;
+
+    public Person() {
     }
 
     public Long getId() {
@@ -56,5 +56,23 @@ public class Person {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getInsertionDate() {
+        return insertionDate;
+    }
+
+    public void setInsertionDate(String insertionDate) {
+        this.insertionDate = insertionDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", age=" + age +
+                ", insertionDate='" + insertionDate + '\'' +
+                '}';
     }
 }
