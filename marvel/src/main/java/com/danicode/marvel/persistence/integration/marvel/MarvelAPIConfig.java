@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class MarvelApiConfig {
+public class MarvelAPIConfig {
 
     @Autowired
     @Qualifier("md5Encoder")
