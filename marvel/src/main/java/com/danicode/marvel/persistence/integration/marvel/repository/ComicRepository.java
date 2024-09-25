@@ -3,6 +3,7 @@ package com.danicode.marvel.persistence.integration.marvel.repository;
 import com.danicode.marvel.dto.CustomPageable;
 import com.danicode.marvel.persistence.integration.marvel.MarvelAPIConfig;
 import com.danicode.marvel.persistence.integration.marvel.dto.ComicDto;
+import com.danicode.marvel.persistence.integration.marvel.mapper.ComicMapper;
 import com.danicode.marvel.service.HttpClientService;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.stereotype.Repository;
@@ -61,7 +62,7 @@ public class ComicRepository {
         marvelQueryParams.put("offset", Long.toString(pageable.getOffset()));
         marvelQueryParams.put("limit", Long.toString(pageable.getLimit()));
 
-        if (characterId != null && characterId.longValue() > 0) {
+        if (characterId != null && characterId > 0) {
             marvelQueryParams.put("characters", Long.toString(characterId));
         }
 

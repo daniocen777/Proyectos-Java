@@ -7,6 +7,14 @@ public class CharacterDto {
     private String modified;
     private String resourceURI;
 
+    public CharacterDto(Long id, String name, String description, String modified, String resourceURI) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.modified = modified;
+        this.resourceURI = resourceURI;
+    }
+
     public Long getId() {
         return id;
     }
@@ -50,6 +58,11 @@ public class CharacterDto {
     public static class CharacterInfoDto {
         private String imagePath;
         private String description;
+
+        public CharacterInfoDto(String imagePath, String description) {
+            this.imagePath = imagePath;
+            this.description = description;
+        }
 
         public String getImagePath() {
             return imagePath;

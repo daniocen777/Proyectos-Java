@@ -4,6 +4,11 @@ public class ThumbnailDto {
     private String path;
     private String extension;
 
+    public ThumbnailDto(String path, String extension) {
+        this.path = path;
+        this.extension = extension;
+    }
+
     public String getPath() {
         return path;
     }

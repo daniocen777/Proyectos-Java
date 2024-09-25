@@ -8,6 +8,15 @@ public class ComicDto {
     private String resourceURI;
     private ThumbnailDto thumbnail;
 
+    public ComicDto(Long id, String title, String description, String modified, String resourceURI, ThumbnailDto thumbnail) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.modified = modified;
+        this.resourceURI = resourceURI;
+        this.thumbnail = thumbnail;
+    }
+
     public Long getId() {
         return id;
     }

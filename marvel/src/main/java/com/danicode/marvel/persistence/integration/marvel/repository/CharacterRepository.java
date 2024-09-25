@@ -3,6 +3,7 @@ package com.danicode.marvel.persistence.integration.marvel.repository;
 import com.danicode.marvel.dto.CustomPageable;
 import com.danicode.marvel.persistence.integration.marvel.MarvelAPIConfig;
 import com.danicode.marvel.persistence.integration.marvel.dto.CharacterDto;
+import com.danicode.marvel.persistence.integration.marvel.mapper.CharacterMapper;
 import com.danicode.marvel.service.HttpClientService;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,7 +57,7 @@ public class CharacterRepository {
         // Peticion que devuelve un json
         JsonNode response = httpClientService.doGet(finalUrl, marvelQueryParams, JsonNode.class);
 
-        return CharacterMapper.toDtoList(response).get(0);
+        return CharacterMapper.toInfoDtoList(response).get(0);
 
     }
 
@@ -95,6 +96,4 @@ public class CharacterRepository {
 
         return String.join(",", stringArray);
     }
-
-
 }
