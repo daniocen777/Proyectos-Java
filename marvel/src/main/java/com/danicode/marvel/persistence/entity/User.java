@@ -1,5 +1,9 @@
 package com.danicode.marvel.persistence.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,9 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+// Implementar UserDetails para aplicar la seguridad (SecurityBeansInjector)
 @Entity
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,8 +52,45 @@ public class User {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return !accountExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !accountLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return !credentialsExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (role == null) return new ArrayList<>();
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        // Agregar el rol como si fuera un permiso
+        authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
+        // Obtener los permisos asociados al rol
+        if (role.getPermissions() == null) return authorities;
+        role.getPermissions().forEach(grantedPermission -> {
+            String permissionName = grantedPermission.getPermission().getName();
+            authorities.add(new SimpleGrantedAuthority(permissionName));
+        });
+
+        return authorities;
     }
 
     public String getPassword() {
